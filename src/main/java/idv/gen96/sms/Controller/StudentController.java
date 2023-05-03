@@ -28,4 +28,11 @@ public class StudentController {
         //顯示templates/students.html
         return "students";
     }
+
+    @GetMapping("/students/new")
+    public String newStudent(Model model){
+        StudentDTO studentDTO = new StudentDTO();
+        model.addAttribute("student", studentDTO);
+        return "create_student";
+    }
 }
