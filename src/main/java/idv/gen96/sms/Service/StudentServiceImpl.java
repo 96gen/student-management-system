@@ -22,6 +22,7 @@ public class StudentServiceImpl implements StudentService{
     //取得全部的學生
     public List<StudentDTO> getAllStudents() {
         List<Student> students = studentRepository.findAll();
+        //將entity轉換成DTO
         List<StudentDTO> studentDTOs = students.stream()
                 .map((student) -> StudentMapper.mapToStudentDTO(student))
                 .collect(Collectors.toList());

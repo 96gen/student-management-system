@@ -23,7 +23,9 @@ public class StudentController {
     @GetMapping("/students")
     public String listStudents(Model model){
         List<StudentDTO> students = studentService.getAllStudents();
+        //將students傳遞給前端
         model.addAttribute("students", students);
+        //顯示templates/students.html
         return "students";
     }
 }
