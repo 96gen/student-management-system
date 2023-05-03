@@ -28,4 +28,11 @@ public class StudentServiceImpl implements StudentService{
                 .collect(Collectors.toList());
         return studentDTOs;
     }
+
+    //創建新學生並儲存
+    @Override
+    public void createStudent(StudentDTO studentDTO) {
+        Student student = StudentMapper.mapToStudent(studentDTO);
+        studentRepository.save(student);
+    }
 }
