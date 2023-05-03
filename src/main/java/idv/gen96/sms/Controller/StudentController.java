@@ -97,4 +97,13 @@ public class StudentController {
         studentService.deleteStudent(studentId);
         return "redirect:/students";
     }
+
+    //查看學生資訊
+    @GetMapping("/students/{studentId}/view")
+    public String viewStudent(@PathVariable("studentId") long studentId,
+                              Model model){
+        StudentDTO studentDTO = studentService.getStudentById(studentId);
+        model.addAttribute("student", studentDTO);
+        return "view_student";
+    }
 }
