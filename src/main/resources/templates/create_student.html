@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--為了使用th:each th:text必須要在此聲明xmlns:th-->
+<!--為了使用th:field th:if th:errors必須要在此聲明xmlns:th-->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -21,6 +21,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" th:href="@{/students/new}">New Student</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/students}">Students</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -41,14 +44,17 @@
           <div class="form-group mb-3">
             <label class="form-label">Student First Name</label>
             <input class="form-control" id="firstName" name="firstName" placeholder="Enter first name" type="text" th:field="*{firstName}" />
+            <p th:if="${#fields.hasErrors('firstName')}" class="text-danger" th:errors="*{firstName}"></p>
           </div>
           <div class="form-group mb-3">
             <label class="form-label">Student Last Name</label>
             <input class="form-control" id="lastName" name="lastName" placeholder="Enter last name" type="text" th:field="*{lastName}" />
+            <p th:if="${#fields.hasErrors('lastName')}" class="text-danger" th:errors="*{lastName}"></p>
           </div>
           <div class="form-group mb-3">
             <label class="form-label">Student Email</label>
             <input class="form-control" id="email" name="email" placeholder="Enter email" type="text" th:field="*{email}" />
+            <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></p>
           </div>
           <button class="btn btn-primary" type="submit">Submit</button>
         </form>

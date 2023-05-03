@@ -2,8 +2,10 @@ package idv.gen96.sms.Controller;
 
 import idv.gen96.sms.DTO.StudentDTO;
 import idv.gen96.sms.Service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,7 +48,15 @@ public class StudentController {
     //POST http://localhost:8080/students
     //創建儲存學生資訊
     @PostMapping("/students")
-    public String saveStudent(@ModelAttribute("student") StudentDTO studentDTO){
+    public String saveStudent(@Valid @ModelAttribute("student") StudentDTO studentDTO,
+                              BindingResult result,
+                              Model model){
+        //如果firstname lastname email為空或不符合格式就會出現錯誤
+        //發生錯誤就留在原來的頁面，並且保留填入的值
+        if(result.hasErrors()){
+            model.addAttribute("student", studentDTO);
+            return "create_student";
+        }
         studentService.createStudent(studentDTO);
         return "redirect:/students";
     }
