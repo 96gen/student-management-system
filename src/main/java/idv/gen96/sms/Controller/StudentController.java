@@ -90,4 +90,11 @@ public class StudentController {
         //返回templates/students.html
         return "redirect:/students";
     }
+
+    //刪除學生資訊
+    @GetMapping("/students/{studentId}/delete")
+    public String deleteStudent(@PathVariable("studentId") long studentId){
+        studentService.deleteStudent(studentId);
+        return "redirect:/students";
+    }
 }
